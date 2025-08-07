@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regnology Idle Page - Browser Game</title>
+    
+    <!-- ORU Design System Styles -->
+    <link rel="stylesheet" href="do-not-modify/styles/oru-web-components.styles.css" />
+    
+    <!-- ORU Component Overrides (do not modify) -->
+    <link rel="stylesheet" href="do-not-modify/styles/oru-overrides.css" />
+    
+    <!-- Layout and Page Styles (modify this for your game)  -->
+    <link rel="stylesheet" href="src/styles/layout.css" />
+
+    <!-- Custom Game Styles (modify this for your game) -->
+    <link rel="stylesheet" href="src/styles/game.css" />
+</head>
+<body>
+    <!-- ORU Web Startup Component with Browser Game -->
+    <oru-web-startup variant="loader">
+        <div class="browser-game-placeholder">
+            <div class="game-area" id="gameArea">
+                <div>Your game goes here! 🎲</div>
+            </div>
+            <button id="startGameBtn" class="game-button">Start Game</button>
+        </div>
+    </oru-web-startup>
+
+    <!-- ORU Web Components Bundle -->
+    <script src="do-not-modify/js/oru-web-components.bundle.js" type="module"></script>
+    
+    <!-- Game Logic (modify this for your game) -->
+    <script src="src/js/game.js"></script>
+    
+    <!-- Main Application (modify this for your game) -->
+    <script src="src/js/app.js"></script>
+</body>
+</html>

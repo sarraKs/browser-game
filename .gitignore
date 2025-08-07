@@ -1,0 +1,30 @@
+# Regnology Idle Page Browser Game
+
+node_modules/
+*.log
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# Build outputs
+dist/
+build/
+
+# IDE files
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary extraction files
+package/

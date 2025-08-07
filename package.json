@@ -1,0 +1,26 @@
+{
+  "name": "regnology-idle-page-browser-game",
+  "version": "1.0.0",
+  "description": "Browser game scaffolding for Regnology's Idle-Page Game Hackathon",
+  "main": "index.html",
+  "scripts": {
+    "setup": "node setup.js",
+    "serve": "npx http-server -p 8080 -c-1 -o",
+    "start": "npm run serve"
+  },
+  "keywords": [
+    "browser-game",
+    "regnology",
+    "hackathon",
+    "idle-page",
+    "vanilla-js"
+  ],
+  "author": "Regnology Hackathon Team",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

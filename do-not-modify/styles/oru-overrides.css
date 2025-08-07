@@ -1,0 +1,16 @@
+/* ORU Web Components Theme Overrides */
+
+/* ORU Startup Component Adjustments */
+.oru-startup-loader-logo-wrapper {
+    margin: 0 !important;
+}
+
+.oru-startup-loader {
+    padding-bottom: 0 !important;
+}
+
+.oru-startup-footer {
+    padding-top: 0 !important;
+}
+
+/* Additional ORU component customizations can go here */
