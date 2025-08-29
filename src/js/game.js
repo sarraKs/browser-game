@@ -221,31 +221,133 @@ class BrowserGame {
         const w = this.fighter.width;
         const h = this.fighter.height;
         
-        // Add glow effect to make spaceship more visible
-        this.ctx.shadowColor = '#4ecdc4';
-        this.ctx.shadowBlur = 10;
+        // Draw cloud background (RCloud)
+        this.ctx.save();
         
-        this.ctx.fillStyle = '#4ecdc4';
-        this.ctx.strokeStyle = '#45b7d1';
-        this.ctx.lineWidth = 3;
+        // Draw spaceship wings behind cloud
+        this.ctx.fillStyle = '#4a5568';
+        this.ctx.strokeStyle = '#2d3748';
+        this.ctx.lineWidth = 2;
         
-        // Draw fighter body (triangle)
+        // Left wing
         this.ctx.beginPath();
-        this.ctx.moveTo(x, y - h/2);
-        this.ctx.lineTo(x - w/2, y + h/2);
-        this.ctx.lineTo(x + w/2, y + h/2);
+        this.ctx.moveTo(x - w/2 - 10, y);
+        this.ctx.lineTo(x - w/2 - 5, y - 10);
+        this.ctx.lineTo(x - w/4, y - 5);
+        this.ctx.lineTo(x - w/3, y + 5);
         this.ctx.closePath();
         this.ctx.fill();
         this.ctx.stroke();
         
-        // Draw cockpit
-        this.ctx.fillStyle = '#ffffff';
+        // Right wing
         this.ctx.beginPath();
-        this.ctx.arc(x, y, 6, 0, Math.PI * 2);
+        this.ctx.moveTo(x + w/2 + 10, y);
+        this.ctx.lineTo(x + w/2 + 5, y - 10);
+        this.ctx.lineTo(x + w/4, y - 5);
+        this.ctx.lineTo(x + w/3, y + 5);
+        this.ctx.closePath();
+        this.ctx.fill();
+        this.ctx.stroke();
+        
+        // Draw engine thrusters (animated)
+        const thrusterGlow = Math.sin(this.gameTime * 0.01) * 0.3 + 0.7;
+        
+        // Left thruster
+        this.ctx.shadowColor = '#00ffff';
+        this.ctx.shadowBlur = 10 * thrusterGlow;
+        this.ctx.fillStyle = `rgba(0, 255, 255, ${thrusterGlow})`;
+        this.ctx.beginPath();
+        this.ctx.arc(x - w/3, y + h/2 + 5, 4, 0, Math.PI * 2);
         this.ctx.fill();
         
-        // Reset shadow
+        // Right thruster
+        this.ctx.beginPath();
+        this.ctx.arc(x + w/3, y + h/2 + 5, 4, 0, Math.PI * 2);
+        this.ctx.fill();
+        
+        // Center thruster
+        this.ctx.beginPath();
+        this.ctx.arc(x, y + h/2 + 8, 5, 0, Math.PI * 2);
+        this.ctx.fill();
+        
+        // Draw thruster flames
+        this.ctx.fillStyle = `rgba(255, 100, 0, ${thrusterGlow * 0.8})`;
+        this.ctx.shadowColor = '#ff6400';
+        this.ctx.shadowBlur = 15 * thrusterGlow;
+        
+        // Flame trails
+        const flameHeight = 10 + Math.random() * 5;
+        this.ctx.beginPath();
+        this.ctx.moveTo(x - w/3 - 2, y + h/2 + 8);
+        this.ctx.lineTo(x - w/3, y + h/2 + 8 + flameHeight);
+        this.ctx.lineTo(x - w/3 + 2, y + h/2 + 8);
+        this.ctx.fill();
+        
+        this.ctx.beginPath();
+        this.ctx.moveTo(x + w/3 - 2, y + h/2 + 8);
+        this.ctx.lineTo(x + w/3, y + h/2 + 8 + flameHeight);
+        this.ctx.lineTo(x + w/3 + 2, y + h/2 + 8);
+        this.ctx.fill();
+        
+        this.ctx.beginPath();
+        this.ctx.moveTo(x - 3, y + h/2 + 11);
+        this.ctx.lineTo(x, y + h/2 + 11 + flameHeight * 1.2);
+        this.ctx.lineTo(x + 3, y + h/2 + 11);
+        this.ctx.fill();
+        
+        // Add soft glow effect for cloud
+        this.ctx.shadowColor = 'rgba(255, 255, 255, 0.8)';
+        this.ctx.shadowBlur = 15;
+        
+        // Draw cloud shape using circles
+        this.ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
+        
+        // Main cloud body - multiple overlapping circles for fluffy effect
+        this.ctx.beginPath();
+        this.ctx.arc(x - w/3, y, w/3, 0, Math.PI * 2);
+        this.ctx.arc(x + w/3, y, w/3, 0, Math.PI * 2);
+        this.ctx.arc(x, y - h/4, w/3, 0, Math.PI * 2);
+        this.ctx.arc(x - w/5, y - h/5, w/4, 0, Math.PI * 2);
+        this.ctx.arc(x + w/5, y - h/5, w/4, 0, Math.PI * 2);
+        this.ctx.fill();
+        
+        // Cloud outline with tech style
+        this.ctx.strokeStyle = 'rgba(100, 150, 255, 0.6)';
+        this.ctx.lineWidth = 1.5;
+        this.ctx.stroke();
+        
+        // Add small cockpit window on top
+        this.ctx.fillStyle = 'rgba(0, 100, 200, 0.7)';
+        this.ctx.shadowColor = '#0064c8';
+        this.ctx.shadowBlur = 5;
+        this.ctx.beginPath();
+        this.ctx.ellipse(x, y - h/3, 8, 4, 0, 0, Math.PI * 2);
+        this.ctx.fill();
+        
+        // Reset shadow for text
         this.ctx.shadowBlur = 0;
+        
+        // Draw Regnology "R" in the cloud
+        this.ctx.fillStyle = '#1e3a8a'; // Dark blue for Regnology brand
+        this.ctx.font = 'bold 24px Arial, sans-serif';
+        this.ctx.textAlign = 'center';
+        this.ctx.textBaseline = 'middle';
+        
+        // Add text shadow for better visibility
+        this.ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
+        this.ctx.shadowBlur = 2;
+        this.ctx.shadowOffsetX = 1;
+        this.ctx.shadowOffsetY = 1;
+        
+        // Draw the R with metallic gradient effect
+        const gradient = this.ctx.createLinearGradient(x - 10, y - 10, x + 10, y + 10);
+        gradient.addColorStop(0, '#2563eb');
+        gradient.addColorStop(0.5, '#1e3a8a');
+        gradient.addColorStop(1, '#1e293b');
+        this.ctx.fillStyle = gradient;
+        this.ctx.fillText('R', x, y);
+        
+        this.ctx.restore();
     }
 
     spawnMissile() {
