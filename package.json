@@ -6,7 +6,8 @@
   "scripts": {
     "setup": "node setup.js",
     "serve": "npx http-server -p 8080 -c-1 -o",
-    "start": "npm run serve"
+    "start": "npm run serve",
+    "build": "echo 'No build step needed for static site'"
   },
   "keywords": [
     "browser-game",
